@@ -10,7 +10,11 @@ const server = new ApolloServer({
     playground: true,
     uploads: false,
     debug: true,
-    engine: true
+    engine: true,
+    cors: {
+      origin: ['http://localhost:3000', 'http://192.168.1.111:3000'],
+      credentials: true
+    }
 });
 
 server.listen().then(({ url }) => {
