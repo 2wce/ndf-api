@@ -1,15 +1,16 @@
 {
   "version": 2,
+  "alias": "ndf-api.now.sh",
   "builds": [
     {
-      "src": "index.js",
+      "src": "lib/index.js",
       "use": "@now/node-server"
     }
   ],
   "routes": [
     {
       "src": "/.*",
-      "dest": "index.js"
+      "dest": "lib/index.js"
     }
   ],
   "name": "ndf-api"
