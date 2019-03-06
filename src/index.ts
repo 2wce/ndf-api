@@ -10,6 +10,7 @@ const server = new ApolloServer({
     playground: true,
     uploads: false,
     debug: true,
+    engine: true
 });
 
 server.listen().then(({ url }) => {
