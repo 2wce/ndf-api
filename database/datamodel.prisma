@@ -1,0 +1,164 @@
+  type Agenda {
+    createdAt: DateTime!
+    id: ID! @unique
+    updatedAt: DateTime!
+
+    description: String
+    image: String
+    name: String!
+  }
+
+  type Booking {
+    createdAt: DateTime!
+    id: ID! @unique
+    updatedAt: DateTime!
+
+    event: Event
+    member: Member
+  }
+
+  type Event {
+    createdAt: DateTime!
+    id: ID! @unique
+    updatedAt: DateTime!
+
+    communityTag: String
+    date: String
+    description: String
+    name: String!
+    time: String
+
+    agenda: Agenda
+    bookings: [Booking!]!
+    coordinator: String
+    memberLevel: [MemberLevel!]!
+    region: Region
+    sector: Sector
+    speakers: [Speaker!]!
+    sponsors: [Sponsor!]!
+    type: EventType
+  }
+
+  enum EventType {
+    MEMBER_EVENT
+    CORPORATE_EVENT
+    RESEARCH_EVENT
+    CONFERENCE
+    SPECIAL_EVENT
+  }
+
+  type Speaker {
+    createdAt: DateTime!
+    id: ID! @unique
+    updatedAt: DateTime!
+
+    jobTitle: String
+    avatar: String
+    name: String!
+  }
+
+  type Sponsor {
+    createdAt: DateTime!
+    id: ID! @unique
+    updatedAt: DateTime!
+
+    avatar: String
+    name: String!
+  }
+
+  type MemberLevel {
+    createdAt: DateTime!
+    id: ID! @unique
+    updatedAt: DateTime!
+
+    name: LevelName
+    subscription: String
+    event: [Event!]!
+  }
+
+  enum LevelName {
+    MEMBER
+    ASSOCIATE
+    PARTNER
+    STRATEGIC_PARTNER
+  }
+
+  # Membership
+  type Membership {
+    createdAt: DateTime!
+    id: ID! @unique
+    updatedAt: DateTime!
+
+    # enums
+    type: MemberType
+
+    # relationship
+    level: MemberLevel
+    # nominees: [Nominee]
+    member: Member
+  }
+
+  type Region {
+    createdAt: DateTime!
+    id: ID! @unique
+    updatedAt: DateTime!
+
+    name: String
+  }
+
+  type Sector {
+    createdAt: DateTime!
+    id: ID! @unique
+    updatedAt: DateTime!
+
+    description: String
+    name: String!
+  }
+
+  type Member {
+    createdAt: DateTime!
+    id: ID! @unique
+    updatedAt: DateTime!
+
+    # enums
+    type: MemberType
+
+    # relationships
+    membership: Membership
+
+    # scalars
+    companyName: String
+    email: String! @unique
+    jobTitle: String
+    name: String
+    password: String
+    phoneNumber: String
+    profilePicture: String
+  }
+
+  enum MemberType {
+    INDIVIDUAL
+    INSTITUTIONAL
+  }
+
+  type Subscriber {
+    createdAt: DateTime!
+    id: ID! @unique
+    updatedAt: DateTime!
+
+    email: String!
+  }
+
+  type Applicant {
+    createdAt: DateTime!
+    id: ID! @unique
+    updatedAt: DateTime!
+
+    type: MemberType
+
+    companyName: String
+    email: String! @unique
+    jobTitle: String
+    name: String
+    phoneNumber: String
+  }
