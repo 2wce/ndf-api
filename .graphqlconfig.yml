@@ -15,6 +15,3 @@ projects:
           language: typescript
           output:
             binding: src/generated/prisma.ts
-      generate:
-        - generator: typescript-client
-          output: ./src/generated/prisma-client/

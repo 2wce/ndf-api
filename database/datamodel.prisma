@@ -8,6 +8,20 @@
     name: String!
   }
 
+  type Applicant {
+    createdAt: DateTime!
+    id: ID! @unique
+    updatedAt: DateTime!
+
+    type: MemberType
+
+    companyName: String
+    email: String! @unique
+    jobTitle: String
+    name: String
+    phoneNumber: String
+  }
+
   type Booking {
     createdAt: DateTime!
     id: ID! @unique
@@ -39,31 +53,25 @@
     type: EventType
   }
 
-  enum EventType {
-    MEMBER_EVENT
-    CORPORATE_EVENT
-    RESEARCH_EVENT
-    CONFERENCE
-    SPECIAL_EVENT
-  }
-
-  type Speaker {
+  type Member {
     createdAt: DateTime!
     id: ID! @unique
     updatedAt: DateTime!
 
+    # enums
+    type: MemberType
+
+    # relationships
+    membership: Membership
+
+    # scalars
+    companyName: String
+    email: String! @unique
     jobTitle: String
-    avatar: String
-    name: String!
-  }
-
-  type Sponsor {
-    createdAt: DateTime!
-    id: ID! @unique
-    updatedAt: DateTime!
-
-    avatar: String
-    name: String!
+    name: String
+    password: String
+    phoneNumber: String
+    profilePicture: String
   }
 
   type MemberLevel {
@@ -74,13 +82,6 @@
     name: LevelName
     subscription: String
     event: [Event!]!
-  }
-
-  enum LevelName {
-    MEMBER
-    ASSOCIATE
-    PARTNER
-    STRATEGIC_PARTNER
   }
 
   # Membership
@@ -115,30 +116,23 @@
     name: String!
   }
 
-  type Member {
+  type Speaker {
     createdAt: DateTime!
     id: ID! @unique
     updatedAt: DateTime!
 
-    # enums
-    type: MemberType
-
-    # relationships
-    membership: Membership
-
-    # scalars
-    companyName: String
-    email: String! @unique
     jobTitle: String
-    name: String
-    password: String
-    phoneNumber: String
-    profilePicture: String
+    avatar: String
+    name: String!
   }
 
-  enum MemberType {
-    INDIVIDUAL
-    INSTITUTIONAL
+  type Sponsor {
+    createdAt: DateTime!
+    id: ID! @unique
+    updatedAt: DateTime!
+
+    avatar: String
+    name: String!
   }
 
   type Subscriber {
@@ -149,16 +143,22 @@
     email: String!
   }
 
-  type Applicant {
-    createdAt: DateTime!
-    id: ID! @unique
-    updatedAt: DateTime!
+  enum EventType {
+    MEMBER_EVENT
+    CORPORATE_EVENT
+    RESEARCH_EVENT
+    CONFERENCE
+    SPECIAL_EVENT
+  }
 
-    type: MemberType
+  enum LevelName {
+    MEMBER
+    ASSOCIATE
+    PARTNER
+    STRATEGIC_PARTNER
+  }
 
-    companyName: String
-    email: String! @unique
-    jobTitle: String
-    name: String
-    phoneNumber: String
+  enum MemberType {
+    INDIVIDUAL
+    INSTITUTIONAL
   }

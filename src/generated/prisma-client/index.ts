@@ -4877,6 +4877,10 @@ export const models: Model[] = [
     embedded: false
   },
   {
+    name: "Applicant",
+    embedded: false
+  },
+  {
     name: "Booking",
     embedded: false
   },
@@ -4885,23 +4889,11 @@ export const models: Model[] = [
     embedded: false
   },
   {
-    name: "EventType",
-    embedded: false
-  },
-  {
-    name: "Speaker",
-    embedded: false
-  },
-  {
-    name: "Sponsor",
+    name: "Member",
     embedded: false
   },
   {
     name: "MemberLevel",
-    embedded: false
-  },
-  {
-    name: "LevelName",
     embedded: false
   },
   {
@@ -4917,11 +4909,11 @@ export const models: Model[] = [
     embedded: false
   },
   {
-    name: "Member",
+    name: "Speaker",
     embedded: false
   },
   {
-    name: "MemberType",
+    name: "Sponsor",
     embedded: false
   },
   {
@@ -4929,7 +4921,15 @@ export const models: Model[] = [
     embedded: false
   },
   {
-    name: "Applicant",
+    name: "EventType",
+    embedded: false
+  },
+  {
+    name: "LevelName",
+    embedded: false
+  },
+  {
+    name: "MemberType",
     embedded: false
   }
 ];
