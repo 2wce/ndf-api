@@ -55,13 +55,13 @@ const memberTypeDefs = gql`
 
   # Inputs
   input AddMemberInput {
-    companyName: String
+    companyName: String!
     email: String!
-    jobTitle: String
-    # level: MemberLevel
+    jobTitle: String!
+    levelId: ID!
     name: String!
-    phoneNumber: String
-    type: MemberType
+    phoneNumber: String!
+    type: MemberType!
   }
 
   input AddMembershipInput {

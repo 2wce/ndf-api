@@ -25,12 +25,14 @@ const memberResolvers = {
   Mutation: {
     async addMember(_: any, { input }: any, { db }: Context, info: any) {
       try {
+        const { levelId, ...rest } = input
         // Hash password
         const password = await bcrypt.hash('ashdshjhjsd', 10);
         const member = await db.mutation.createMember({
           data: {
-            ...input,
-            password
+            ...rest,
+            password,
+            membership: { connect: { id: levelId }}
           }
         }, info) as Member
 
