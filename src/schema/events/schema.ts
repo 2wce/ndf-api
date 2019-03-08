@@ -53,6 +53,7 @@ const eventTypeDefs = gql`
     name: String!
     regionId: String
     time: String
+    type: EventType
     speakers: [SpeakerInput]
     sponsors: [SponsorInput]
   }
