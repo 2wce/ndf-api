@@ -2,7 +2,7 @@ import { ValidationError, ApolloError } from 'apollo-server';
 import { Context } from '../../utils';
 import { Region } from '../../generated/prisma-client';
 
-const regionResolvers = {
+export default {
   Query: {
     async regions(parent: any, args: any, { prisma }: Context, info: any) {
       try {
@@ -36,4 +36,3 @@ const regionResolvers = {
   },
 };
 
-export default regionResolvers;

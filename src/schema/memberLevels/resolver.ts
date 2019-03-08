@@ -2,7 +2,7 @@ import { ValidationError, ApolloError } from 'apollo-server';
 import { Context } from '../../utils';
 import { MemberLevel } from '../../generated/prisma-client';
 
-const memberLevelResolvers = {
+export default {
   Query: {
     async memberLevels(parent: any, args: any, { db }: Context, info: any) {
       try {
@@ -35,4 +35,3 @@ const memberLevelResolvers = {
   },
 };
 
-export default memberLevelResolvers;

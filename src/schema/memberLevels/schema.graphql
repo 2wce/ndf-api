@@ -1,6 +1,3 @@
-import { gql } from 'apollo-server';
-
-const memberLevelTypeDefs = gql`
   type MemberLevel {
     id: ID!
     name: LevelName
@@ -26,14 +23,11 @@ const memberLevelTypeDefs = gql`
     error: Error
   }
 
-  extend type Query {
+  type Query {
     memberLevel(id: ID!): MemberLevel
     memberLevels: [MemberLevel]
   }
 
-  extend type Mutation {
+  type Mutation {
     addMemberLevel(input: AddMemberLevelInput!): AddMemberLevelResponse
   }
-`;
-
-export default memberLevelTypeDefs;

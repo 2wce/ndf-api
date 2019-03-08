@@ -1,7 +1,7 @@
 import { ValidationError, ApolloError } from 'apollo-server';
 import { Context } from '../../utils';
 
-const bookingResolvers = {
+export default {
   Query: {
     async bookings(parent: any, args: any, { db }: Context, info: any) {
       try {
@@ -36,4 +36,3 @@ const bookingResolvers = {
   },
 };
 
-export default bookingResolvers;

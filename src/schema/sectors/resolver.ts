@@ -2,7 +2,7 @@ import { ValidationError, ApolloError } from 'apollo-server';
 import { Context } from '../../utils';
 import { Sector } from '../../generated/prisma-client'
 
-const sectorResolvers = {
+export default {
   Query: {
     async sectors(parent: any, { orderBy }: any, { prisma }: Context, info: any) {
       try {
@@ -33,4 +33,3 @@ const sectorResolvers = {
   },
 };
 
-export default sectorResolvers;

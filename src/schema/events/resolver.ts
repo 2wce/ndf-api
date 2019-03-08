@@ -1,9 +1,27 @@
 import { ValidationError, ApolloError } from 'apollo-server';
 import { Context } from '../../utils';
-import { Event } from '../../generated/prisma-client'
+import { Event, Speaker, Sponsor } from '../../generated/prisma-client'
 
-const eventResolvers = {
+export default {
   Query: {
+    async searchSpeakers(parent: any, { name }: any, { db }: Context, info: any) {
+      try {
+        return await db.query.speakers({
+          where: { name_contains: name }
+        }, info) as Speaker[]
+      } catch (error) {
+        throw new ApolloError(error);
+      }
+    },
+    async searchSponsors(parent: any, { name }: any, { db }: Context, info: any) {
+      try {
+        return await db.query.sponsors({
+          where: { name_contains: name }
+        }, info) as Sponsor[]
+      } catch (error) {
+        throw new ApolloError(error);
+      }
+    },
     async events(parent: any, args: any, { db }: Context, info: any) {
       try {
         return await db.query.events({}, info) as Event[]
@@ -45,4 +63,3 @@ const eventResolvers = {
   }
 };
 
-export default eventResolvers;

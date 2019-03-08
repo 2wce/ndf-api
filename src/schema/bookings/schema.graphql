@@ -1,7 +1,3 @@
-import { gql } from 'apollo-server';
-
-const bookingTypeDefs = gql`
-  # A  User
   type Booking {
     id: ID!
 
@@ -20,14 +16,12 @@ const bookingTypeDefs = gql`
     error: Error
   }
 
-  extend type Query {
+  type Query {
     booking(id: ID!): Booking
     bookings: [Booking]
   }
 
-  extend type Mutation {
+  type Mutation {
     addBooking(input: AddBookingInput!): AddBookingResponse
   }
-`;
 
-export default bookingTypeDefs;

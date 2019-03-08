@@ -1,7 +1,7 @@
 import { ValidationError, ApolloError } from 'apollo-server';
 import { Context } from '../../utils';
 
-const agendaResolvers = {
+export default {
   Query: {
     async agendas(parent: any, args: any, { prisma }: Context, info: any) {
       try {
@@ -35,4 +35,3 @@ const agendaResolvers = {
   },
 };
 
-export default agendaResolvers;

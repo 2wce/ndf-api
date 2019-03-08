@@ -3,7 +3,7 @@ import * as bcrypt from 'bcryptjs';
 import { Context } from '../../utils';
 import { Member, Membership } from '../../generated/prisma-client';
 
-const memberResolvers = {
+export default {
   Query: {
     async members(parent: any, args: any, { db }: Context, info: any) {
       try {
@@ -66,10 +66,8 @@ const memberResolvers = {
   },
   Membership: {
     level: ({ id }: any, args: any, { prisma }: Context, info: any) => {
-      console.log({ id })
       return prisma.membership({ id }).level()
     }
   }
 };
 
-export default memberResolvers;

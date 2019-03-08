@@ -1,7 +1,3 @@
-import { gql } from 'apollo-server';
-
-const sectorTypeDefs = gql`
-  # A  User
   type Sector {
     id: ID!
 
@@ -22,14 +18,12 @@ const sectorTypeDefs = gql`
     error: Error
   }
 
-  extend type Query {
+  type Query {
     sector(id: ID!): Sector
     sectors(orderBy: String): [Sector]
   }
 
-  extend type Mutation {
+  type Mutation {
     addSector(input: AddSectorInput!): AddSectorResponse
   }
-`;
 
-export default sectorTypeDefs;

@@ -1,55 +1,14 @@
-import { gql, makeExecutableSchema } from 'apollo-server';
-import { merge } from 'lodash';
+import { makeExecutableSchema } from 'apollo-server';
+import { importSchema } from 'graphql-import';
+// @ts-ignore
+import { fileLoader, mergeResolvers } from "merge-graphql-schemas";
+import * as path from 'path';
 
-import { agendaResolvers, agendaTypeDefs } from './agendas';
-import { bookingResolvers, bookingTypeDefs } from './bookings';
-import { eventResolvers, eventTypeDefs } from './events';
-import { memberResolvers, memberTypeDefs } from './members';
-import { memberLevelResolvers, memberLevelTypeDefs } from './memberLevels';
-import { regionResolvers, regionTypeDefs } from './regions';
-import { sectorResolvers, sectorTypeDefs } from './sectors';
+const typeDefs = importSchema(path.join(__dirname, 'schema.graphql'));
 
-const init = gql`
-  type Query {
-    _empty: String
-  }
+const resolversArray = fileLoader(path.join(__dirname, "/**/resolver.ts"), { recursive: true });
 
-  type Mutation {
-    _empty(nothing: String): String
-  }
-
-  type Error {
-    status: String
-    message: String
-  }
-
-  interface Response {
-    success: Boolean
-    error: Error
-  }
-`;
-
-const typeDefs = [
-  init,
-  agendaTypeDefs,
-  bookingTypeDefs,
-  eventTypeDefs,
-  memberTypeDefs,
-  memberLevelTypeDefs,
-  regionTypeDefs,
-  sectorTypeDefs
-];
-
-const resolvers = merge(
-  {},
-  agendaResolvers,
-  bookingResolvers,
-  eventResolvers,
-  memberResolvers,
-  memberLevelResolvers,
-  regionResolvers,
-  sectorResolvers
-);
+const resolvers = mergeResolvers(resolversArray);
 
 const schema = makeExecutableSchema({
   typeDefs,

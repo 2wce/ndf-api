@@ -1,6 +1,4 @@
-import { gql } from 'apollo-server';
-
-const eventTypeDefs = gql`
+# import SpeakerCreateManyInput, SponsorCreateManyInput from "../../generated/prisma.graphql"
   # An Event
   type Event {
     createdAt: Int
@@ -32,17 +30,6 @@ const eventTypeDefs = gql`
     SPECIAL_EVENT
   }
 
-  type Speaker {
-    jobTitle: String
-    avatar: String
-    name: String!
-  }
-
-  type Sponsor {
-    avatar: String
-    name: String!
-  }
-
   input AddEventInput {
     agendaId: String
     communityTag: String
@@ -54,19 +41,8 @@ const eventTypeDefs = gql`
     regionId: String
     time: String
     type: EventType
-    speakers: [SpeakerInput]
-    sponsors: [SponsorInput]
-  }
-
-  input SpeakerInput {
-    name: String
-    avatar: String
-    jobTitle: String
-  }
-
-  input SponsorInput {
-    name: String
-    avatar: String
+    speakers: SpeakerCreateManyInput
+    sponsors: SponsorCreateManyInput
   }
 
   type AddEventResponse implements Response {
@@ -75,14 +51,14 @@ const eventTypeDefs = gql`
     error: Error
   }
 
-  extend type Query {
+  type Query {
     event(id: ID!): Event
     events: [Event]
+    searchSpeakers(name: String!): [Speaker]
+    searchSponsors(name: String!): [Sponsor]
   }
 
-  extend type Mutation {
+  type Mutation {
     addEvent(input: AddEventInput!): AddEventResponse
   }
-`;
 
-export default eventTypeDefs;
