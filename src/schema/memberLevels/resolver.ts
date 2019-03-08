@@ -4,16 +4,16 @@ import { MemberLevel } from '../../generated/prisma-client';
 
 const memberLevelResolvers = {
   Query: {
-    async memberLevels(parent: any, args: any, { prisma }: Context, info: any) {
+    async memberLevels(parent: any, args: any, { db }: Context, info: any) {
       try {
-        return await prisma.memberLevels() as MemberLevel[];
+        return await db.query.memberLevels({}, info) as MemberLevel[];
       } catch (error) {
         throw new ApolloError(error);
       }
     },
-    async memberLevel(_: null, { id }: any, { prisma }: Context) {
+    async memberLevel(_: null, { id }: any, { db }: Context, info: any) {
       try {
-        const memberLevel = await prisma.memberLevel({ id })
+        const memberLevel = await db.query.memberLevel({ where: { id } }, info)
         return memberLevel || new ValidationError('MemberLevel ID not found');
       } catch (error) {
         throw new ApolloError(error);

@@ -3,16 +3,16 @@ import { Context } from '../../utils';
 
 const bookingResolvers = {
   Query: {
-    async bookings(parent: any, args: any, { prisma }: Context, info: any) {
+    async bookings(parent: any, args: any, { db }: Context, info: any) {
       try {
-        return await prisma.bookings()
+        return await db.query.bookings({}, info)
       } catch (error) {
         throw new ApolloError(error);
       }
     },
-    async booking(_: null, { id }: any, { prisma }: Context) {
+    async booking(_: null, { id }: any, { db }: Context, info: any) {
       try {
-        const booking = await prisma.booking({ id })
+        const booking = await db.query.booking({ where: { id } }, info)
         return booking || new ValidationError('Booking ID not found');
       } catch (error) {
         throw new ApolloError(error);

@@ -5,17 +5,17 @@ import { Member, Membership } from '../../generated/prisma-client';
 
 const memberResolvers = {
   Query: {
-    async members(parent: any, args: any, { prisma }: Context, info: any) {
+    async members(parent: any, args: any, { db }: Context, info: any) {
       try {
-        return await prisma.members().$fragment(info) as Member[];
+        return await db.query.members({}, info) as Member[];
       } catch (error) {
         throw new ApolloError(error);
       }
 
     },
-    async member(_: null, { id }: any, { prisma }: Context, info: any) {
+    async member(_: null, { id }: any, { db }: Context, info: any) {
       try {
-        const member = await prisma.member({ id }).$fragment(info) as Member
+        const member = await db.query.member({ where: { id } }, info) as Member
         return member || new ValidationError('Member ID not found');
       } catch (error) {
         throw new ApolloError(error);
@@ -23,28 +23,32 @@ const memberResolvers = {
     },
   },
   Mutation: {
-    async addMember(_: any, { input }: any, { prisma }: Context, info: any) {
+    async addMember(_: any, { input }: any, { db }: Context, info: any) {
       try {
         // Hash password
         const password = await bcrypt.hash('ashdshjhjsd', 10);
-        const member = await prisma.createMember({
-          ...input,
-          password
-        }).$fragment(info) as Member
+        const member = await db.mutation.createMember({
+          data: {
+            ...input,
+            password
+          }
+        }, info) as Member
 
         return { success: true, error: null, member };
       } catch (error) {
         return { success: false, error: error, member: null };
       }
     },
-    async addMembership(_: any, { input }: any, { prisma }: Context, info: any) {
+    async addMembership(_: any, { input }: any, { db }: Context, info: any) {
       try {
         const { memberId, levelId, type } = input
-        const membership = await prisma.createMembership({
-          level: { connect: { id: levelId }},
-          member: { connect: { id: memberId }},
-          type
-        }).$fragment(info) as Membership
+        const membership = await db.mutation.createMembership({
+          data: {
+            level: { connect: { id: levelId }},
+            member: { connect: { id: memberId }},
+            type
+          }
+        }, info) as Membership
 
         return { success: true, error: null, membership };
       } catch (error) {
