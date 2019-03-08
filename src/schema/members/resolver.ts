@@ -23,18 +23,19 @@ const memberResolvers = {
     },
   },
   Mutation: {
-    async addMember(_: any, { input }: any, { db }: Context, info: any) {
+    async addMember(_: any, { input }: any, { prisma, db }: Context, info: any) {
       try {
         const { levelId, ...rest } = input
         // Hash password
         const password = await bcrypt.hash('ashdshjhjsd', 10);
-        const member = await db.mutation.createMember({
-          data: {
-            ...rest,
+        const member = await prisma.createMember({
+             ...rest,
             password,
-            membership: { connect: { id: levelId }}
-          }
-        }, info) as Member
+            membership: { create: {
+              level: { connect: { id: levelId }},
+              type: rest.type
+            }}
+        }) as Member
 
         return { success: true, error: null, member };
       } catch (error) {
@@ -58,6 +59,17 @@ const memberResolvers = {
       }
     },
   },
+  Member: {
+    membership: ({ id }: any, args: any, { prisma }: Context, info: any) => {
+      return prisma.member({ id }).membership()
+    }
+  },
+  Membership: {
+    level: ({ id }: any, args: any, { prisma }: Context, info: any) => {
+      console.log({ id })
+      return prisma.membership({ id }).level()
+    }
+  }
 };
 
 export default memberResolvers;

@@ -9,6 +9,7 @@ const server = new ApolloServer({
     context: {
       prisma,
       db: new Prisma({
+        debug: true,
         endpoint: 'https://eu1.prisma.sh/kudakwashe-mupeni/ndf-api/dev',
         secret: 'mysecret123'
       })
