@@ -31,7 +31,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "yarn build"
+      "pre-commit": "yarn build"
     }
   },
   "resolutions": {
