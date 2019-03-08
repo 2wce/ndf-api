@@ -43,7 +43,6 @@ const memberTypeDefs = gql`
     email: String!
     jobTitle: String
     name: String
-    password: String
     phoneNumber: String
     profilePicture: String
   }
