@@ -1,0 +1,26 @@
+  type Region {
+    createdAt: String
+    id: String
+    updatedAt: String
+
+    name: String
+  }
+
+  input AddRegionInput {
+    name: String!
+  }
+
+  type AddRegionResponse implements Response {
+    region: Region
+    success: Boolean
+    error: Error
+  }
+
+  type Query {
+    region(id: ID!): Region
+    regions: [Region]
+  }
+
+  type Mutation {
+    addRegion(input: AddRegionInput!): AddRegionResponse
+  }

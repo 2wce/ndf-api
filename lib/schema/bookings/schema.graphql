@@ -1,0 +1,27 @@
+  type Booking {
+    id: ID!
+
+    event: Event
+    member: Member
+  }
+
+  input AddBookingInput {
+    memberId: ID!
+    eventId: ID!
+  }
+
+  type AddBookingResponse implements Response {
+    success: Boolean
+    booking: Booking
+    error: Error
+  }
+
+  type Query {
+    booking(id: ID!): Booking
+    bookings: [Booking]
+  }
+
+  type Mutation {
+    addBooking(input: AddBookingInput!): AddBookingResponse
+  }
+

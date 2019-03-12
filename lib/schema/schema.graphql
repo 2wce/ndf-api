@@ -1,0 +1,29 @@
+# import Speaker, Sponsor, Subscriber, Mutation.deleteManyMembers, Mutation.deleteManyMemberships from '../generated/prisma.graphql'
+
+# import Query, Mutation from "./auth/schema.graphql"
+# import Query, Mutation from "./agendas/schema.graphql"
+# import Query, Mutation from './bookings/schema.graphql'
+# import Query, Mutation from './events/schema.graphql'
+# import Query, Mutation from './memberLevels/schema.graphql'
+# import Query, Mutation from './members/schema.graphql'
+# import Query, Mutation from './regions/schema.graphql'
+# import Query, Mutation from './sectors/schema.graphql'
+# import Query, Mutation from './subscribers/schema.graphql'
+
+  type Query {
+    _empty: String
+  }
+
+  type Mutation {
+    _empty(nothing: String): String
+  }
+
+  type Error {
+    status: String
+    message: String
+  }
+
+  interface Response {
+    success: Boolean
+    error: Error
+  }

@@ -1,0 +1,64 @@
+# import SpeakerCreateManyInput, SponsorCreateManyInput from "../../generated/prisma.graphql"
+  # An Event
+  type Event {
+    createdAt: Int
+    id: ID!
+    updatedAt: Int
+
+    communityTag: String
+    date: String
+    description: String
+    name: String!
+    time: String
+
+    agenda: Agenda
+    bookings: [Booking]
+    coordinator: String
+    memberLevel: [MemberLevel]
+    region: Region
+    # sector: Sector
+    speakers: [Speaker]
+    sponsors: [Sponsor]
+    type: EventType
+  }
+
+  enum EventType {
+    MEMBER_EVENT
+    CORPORATE_EVENT
+    RESEARCH_EVENT
+    CONFERENCE
+    SPECIAL_EVENT
+  }
+
+  input AddEventInput {
+    agendaId: String
+    communityTag: String
+    coordinator: String
+    date: String
+    description: String
+    memberLevelId: String
+    name: String!
+    regionId: String
+    time: String
+    type: EventType
+    speakers: SpeakerCreateManyInput
+    sponsors: SponsorCreateManyInput
+  }
+
+  type AddEventResponse implements Response {
+    event: Event
+    success: Boolean
+    error: Error
+  }
+
+  type Query {
+    event(id: ID!): Event
+    events: [Event]
+    searchSpeakers(name: String!): [Speaker]
+    searchSponsors(name: String!): [Sponsor]
+  }
+
+  type Mutation {
+    addEvent(input: AddEventInput!): AddEventResponse
+  }
+

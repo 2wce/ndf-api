@@ -1,0 +1,15 @@
+  type AddSubscriberResponse {
+    success: Boolean
+    subscriber: Subscriber
+    error: Error
+  }
+
+  type Query {
+    subscriber(id: ID!): Subscriber
+    subscribers(orderBy: String): [Subscriber]
+  }
+
+  type Mutation {
+    addSubscriber(email: String!): AddSubscriberResponse
+  }
+

@@ -1,0 +1,32 @@
+  # A  User
+  type Agenda {
+    id: ID!
+
+    createdAt: Int
+    description: String
+    image: String
+    name: String!
+    updatedAt: Int
+  }
+
+  input AddAgendaInput {
+    description: String
+    image: String
+    name: String!
+  }
+
+  type AddAgendaResponse {
+    success: Boolean
+    agenda: Agenda
+    error: Error
+  }
+
+  type Query {
+    agenda(id: ID!): Agenda
+    agendas(orderBy: String): [Agenda]
+  }
+
+  type Mutation {
+    addAgenda(input: AddAgendaInput!): AddAgendaResponse
+  }
+
