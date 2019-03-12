@@ -23,6 +23,12 @@ export default {
     },
   },
   Mutation: {
+    async deleteManyMembers(parent: any, args: any, { prisma }: Context, info: any) {
+      return await prisma.deleteManyMembers()
+    },
+    async deleteManyMemberships(parent: any, args: any, { prisma }: Context, info: any) {
+      return await prisma.deleteManyMemberships()
+    },
     async addMember(_: any, { input }: any, { prisma, db }: Context, info: any) {
       try {
         const { levelId, ...rest } = input

@@ -1,4 +1,4 @@
-export function compare(s: any, hash: any, callback: any, progressCallback: any): any;
+export function compare(s: any, hash: any, callback?: any, progressCallback?: any): any;
 export function compareSync(s: any, hash: any): any;
 export function decodeBase64(s: any, len: any): any;
 export function encodeBase64(b: any, len: any): any;
