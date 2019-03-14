@@ -3,8 +3,8 @@
   "alias": "ndf-api.now.sh",
   "builds": [
     {
-      "src": "lib/index.js",
-      "use": "@now/node-server"
+      "src": "src/index.ts",
+      "use": "@now/node"
     }
   ],
   "env": {
@@ -13,7 +13,7 @@
   "routes": [
     {
       "src": "/.*",
-      "dest": "lib/index.js"
+      "dest": "src/index.ts"
     }
   ],
   "name": "ndf-api"
