@@ -8,7 +8,8 @@
     }
   ],
   "env": {
-    "ENGINE_API_KEY": "@engine-key"
+    "ENGINE_API_KEY": "@engine-key",
+    "IS_NOW": "true"
   },
   "routes": [
     {
