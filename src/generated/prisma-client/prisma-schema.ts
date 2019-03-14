@@ -1181,6 +1181,7 @@ type Member {
   membership: Membership
   companyName: String
   email: String!
+  isAdmin: Boolean
   jobTitle: String
   name: String
   password: String
@@ -1199,6 +1200,7 @@ input MemberCreateInput {
   membership: MembershipCreateOneWithoutMemberInput
   companyName: String
   email: String!
+  isAdmin: Boolean
   jobTitle: String
   name: String
   password: String
@@ -1220,6 +1222,7 @@ input MemberCreateWithoutMembershipInput {
   type: MemberType
   companyName: String
   email: String!
+  isAdmin: Boolean
   jobTitle: String
   name: String
   password: String
@@ -1509,6 +1512,8 @@ enum MemberOrderByInput {
   companyName_DESC
   email_ASC
   email_DESC
+  isAdmin_ASC
+  isAdmin_DESC
   jobTitle_ASC
   jobTitle_DESC
   name_ASC
@@ -1528,6 +1533,7 @@ type MemberPreviousValues {
   type: MemberType
   companyName: String
   email: String!
+  isAdmin: Boolean
   jobTitle: String
   name: String
   password: String
@@ -1710,6 +1716,7 @@ input MemberUpdateDataInput {
   membership: MembershipUpdateOneWithoutMemberInput
   companyName: String
   email: String
+  isAdmin: Boolean
   jobTitle: String
   name: String
   password: String
@@ -1722,6 +1729,7 @@ input MemberUpdateInput {
   membership: MembershipUpdateOneWithoutMemberInput
   companyName: String
   email: String
+  isAdmin: Boolean
   jobTitle: String
   name: String
   password: String
@@ -1733,6 +1741,7 @@ input MemberUpdateManyMutationInput {
   type: MemberType
   companyName: String
   email: String
+  isAdmin: Boolean
   jobTitle: String
   name: String
   password: String
@@ -1762,6 +1771,7 @@ input MemberUpdateWithoutMembershipDataInput {
   type: MemberType
   companyName: String
   email: String
+  isAdmin: Boolean
   jobTitle: String
   name: String
   password: String
@@ -1843,6 +1853,8 @@ input MemberWhereInput {
   email_not_starts_with: String
   email_ends_with: String
   email_not_ends_with: String
+  isAdmin: Boolean
+  isAdmin_not: Boolean
   jobTitle: String
   jobTitle_not: String
   jobTitle_in: [String!]

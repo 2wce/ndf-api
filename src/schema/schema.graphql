@@ -1,4 +1,4 @@
-# import Speaker, Sponsor, Subscriber, Mutation.deleteManyMembers, Mutation.deleteManyMemberships from '../generated/prisma.graphql'
+# import Member, Membership, Speaker, Sponsor, Subscriber, Mutation.deleteManyMembers, Mutation.deleteManyMemberships from '../generated/prisma.graphql'
 
 # import Query, Mutation from "./auth/schema.graphql"
 # import Query, Mutation from "./agendas/schema.graphql"
@@ -9,6 +9,8 @@
 # import Query, Mutation from './regions/schema.graphql'
 # import Query, Mutation from './sectors/schema.graphql'
 # import Query, Mutation from './subscribers/schema.graphql'
+
+  directive @isAuthenticated on FIELD | FIELD_DEFINITION
 
   type Query {
     _empty: String

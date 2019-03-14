@@ -67,6 +67,7 @@
     # scalars
     companyName: String
     email: String! @unique
+    isAdmin: Boolean @default(value: "false")
     jobTitle: String
     name: String
     password: String

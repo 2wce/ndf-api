@@ -20,17 +20,22 @@ export default {
     },
   },
   Mutation: {
-    async addBooking(_: any, { input }: any, { prisma }: Context, info: any) {
+    async addBooking(_: any, { eventId }: any, { prisma, memberId }: Context, info: any) {
       try {
-        const { eventId, memberId } = input
+        const isEvent = await prisma.$exists.event({ id: eventId})
+
+        if (!isEvent) {
+          throw new ValidationError('Event ID not found')
+        }
+
         const booking = await prisma.createBooking({
           event: { connect: { id: eventId } },
           member: { connect: { id: memberId } }
         })
 
-        return { success: true, error: null, booking };
+        return { booking, success: true, error: null };
       } catch (error) {
-        return { success: false, error: error, booking: null };
+        return { error, success: false, booking: null };
       }
     },
   },

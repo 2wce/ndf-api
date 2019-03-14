@@ -733,6 +733,8 @@ export type MemberOrderByInput =
   | "companyName_DESC"
   | "email_ASC"
   | "email_DESC"
+  | "isAdmin_ASC"
+  | "isAdmin_DESC"
   | "jobTitle_ASC"
   | "jobTitle_DESC"
   | "name_ASC"
@@ -1316,6 +1318,8 @@ export interface MemberWhereInput {
   email_not_starts_with?: String;
   email_ends_with?: String;
   email_not_ends_with?: String;
+  isAdmin?: Boolean;
+  isAdmin_not?: Boolean;
   jobTitle?: String;
   jobTitle_not?: String;
   jobTitle_in?: String[] | String;
@@ -1612,6 +1616,7 @@ export interface MemberCreateInput {
   membership?: MembershipCreateOneWithoutMemberInput;
   companyName?: String;
   email: String;
+  isAdmin?: Boolean;
   jobTitle?: String;
   name?: String;
   password?: String;
@@ -1706,6 +1711,7 @@ export interface MemberUpdateManyMutationInput {
   type?: MemberType;
   companyName?: String;
   email?: String;
+  isAdmin?: Boolean;
   jobTitle?: String;
   name?: String;
   password?: String;
@@ -2548,6 +2554,7 @@ export interface MemberCreateWithoutMembershipInput {
   type?: MemberType;
   companyName?: String;
   email: String;
+  isAdmin?: Boolean;
   jobTitle?: String;
   name?: String;
   password?: String;
@@ -2565,6 +2572,7 @@ export interface MemberUpdateInput {
   membership?: MembershipUpdateOneWithoutMemberInput;
   companyName?: String;
   email?: String;
+  isAdmin?: Boolean;
   jobTitle?: String;
   name?: String;
   password?: String;
@@ -2770,6 +2778,7 @@ export interface MemberUpdateWithoutMembershipDataInput {
   type?: MemberType;
   companyName?: String;
   email?: String;
+  isAdmin?: Boolean;
   jobTitle?: String;
   name?: String;
   password?: String;
@@ -2818,6 +2827,7 @@ export interface MemberUpdateDataInput {
   membership?: MembershipUpdateOneWithoutMemberInput;
   companyName?: String;
   email?: String;
+  isAdmin?: Boolean;
   jobTitle?: String;
   name?: String;
   password?: String;
@@ -3073,6 +3083,7 @@ export interface Member {
   type?: MemberType;
   companyName?: String;
   email: String;
+  isAdmin?: Boolean;
   jobTitle?: String;
   name?: String;
   password?: String;
@@ -3088,6 +3099,7 @@ export interface MemberPromise extends Promise<Member>, Fragmentable {
   membership: <T = MembershipPromise>() => T;
   companyName: () => Promise<String>;
   email: () => Promise<String>;
+  isAdmin: () => Promise<Boolean>;
   jobTitle: () => Promise<String>;
   name: () => Promise<String>;
   password: () => Promise<String>;
@@ -3105,6 +3117,7 @@ export interface MemberSubscription
   membership: <T = MembershipSubscription>() => T;
   companyName: () => Promise<AsyncIterator<String>>;
   email: () => Promise<AsyncIterator<String>>;
+  isAdmin: () => Promise<AsyncIterator<Boolean>>;
   jobTitle: () => Promise<AsyncIterator<String>>;
   name: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
@@ -3963,6 +3976,7 @@ export interface MemberPreviousValues {
   type?: MemberType;
   companyName?: String;
   email: String;
+  isAdmin?: Boolean;
   jobTitle?: String;
   name?: String;
   password?: String;
@@ -3979,6 +3993,7 @@ export interface MemberPreviousValuesPromise
   type: () => Promise<MemberType>;
   companyName: () => Promise<String>;
   email: () => Promise<String>;
+  isAdmin: () => Promise<Boolean>;
   jobTitle: () => Promise<String>;
   name: () => Promise<String>;
   password: () => Promise<String>;
@@ -3995,6 +4010,7 @@ export interface MemberPreviousValuesSubscription
   type: () => Promise<AsyncIterator<MemberType>>;
   companyName: () => Promise<AsyncIterator<String>>;
   email: () => Promise<AsyncIterator<String>>;
+  isAdmin: () => Promise<AsyncIterator<Boolean>>;
   jobTitle: () => Promise<AsyncIterator<String>>;
   name: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;

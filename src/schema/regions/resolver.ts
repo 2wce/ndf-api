@@ -30,7 +30,7 @@ export default {
 
         return { success: true, error: null, region };
       } catch (error) {
-        return { success: false, error: error, region: null };
+        return { success: false, error, region: null };
       }
     },
   },

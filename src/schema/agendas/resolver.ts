@@ -29,7 +29,7 @@ export default {
 
         return { success: true, error: null, agenda };
       } catch (error) {
-        return { success: false, error: error, agenda: null };
+        return { success: false, error, agenda: null };
       }
     },
   },

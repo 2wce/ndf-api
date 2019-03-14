@@ -1,4 +1,5 @@
 export { Context } from './context';
+export { getUserId, validateToken } from './helpers'
 export {
     Agenda,
     Booking,

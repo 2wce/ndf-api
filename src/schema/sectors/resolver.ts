@@ -27,7 +27,7 @@ export default {
 
         return { success: true, error: null, sector };
       } catch (error) {
-        return { success: false, error: error, sector: null };
+        return { success: false, error, sector: null };
       }
     },
   },

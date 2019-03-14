@@ -57,7 +57,7 @@ export default {
 
         return { success: true, error: null, event };
       } catch (error) {
-        return { success: false, error: error, event: null };
+        return { success: false, error, event: null };
       }
     },
   }

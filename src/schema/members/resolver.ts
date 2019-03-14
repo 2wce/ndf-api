@@ -5,17 +5,17 @@ import { Member, Membership } from '../../generated/prisma-client';
 
 export default {
   Query: {
-    async members(parent: any, args: any, { db }: Context, info: any) {
+    async members(parent: any, args: any, { prisma }: Context, info: any) {
       try {
-        return await db.query.members({}, info) as Member[];
+        return await prisma.members() as Member[];
       } catch (error) {
         throw new ApolloError(error);
       }
 
     },
-    async member(_: null, { id }: any, { db }: Context, info: any) {
+    async member(_: null, { id }: any, { prisma }: Context, info: any) {
       try {
-        const member = await db.query.member({ where: { id } }, info) as Member
+        const member = await prisma.member({ id }) as Member
         return member || new ValidationError('Member ID not found');
       } catch (error) {
         throw new ApolloError(error);
@@ -43,9 +43,29 @@ export default {
             }}
         }) as Member
 
-        return { success: true, error: null, member };
+        return { member, success: true, error: null };
       } catch (error) {
-        return { success: false, error: error, member: null };
+        return { error, success: false, member: null };
+      }
+    },
+    async updateMember(_: any, { input }: any, { prisma, db }: Context, info: any) {
+      try {
+        const { memberId, levelId, type } = input
+
+        const member = await prisma.updateMember({
+          where: { id: memberId },
+          data: {
+            type,
+            ...(levelId && { membership: {
+                update: { level: { connect: { id: levelId }}}
+              }
+            })
+          }
+        })
+
+        return { member, success: true, error: null };
+      } catch (error) {
+        return { error, success: false, member: null };
       }
     },
     async addMembership(_: any, { input }: any, { db }: Context, info: any) {
@@ -53,15 +73,15 @@ export default {
         const { memberId, levelId, type } = input
         const membership = await db.mutation.createMembership({
           data: {
+            type,
             level: { connect: { id: levelId }},
             member: { connect: { id: memberId }},
-            type
           }
         }, info) as Membership
 
-        return { success: true, error: null, membership };
+        return { membership, success: true, error: null };
       } catch (error) {
-        return { success: false, error: error, membership: null };
+        return { error, success: false, membership: null };
       }
     },
   },

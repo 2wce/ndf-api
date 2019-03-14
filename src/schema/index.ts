@@ -3,6 +3,7 @@ import { importSchema } from 'graphql-import';
 // @ts-ignore
 import { fileLoader, mergeResolvers } from "merge-graphql-schemas";
 import * as path from 'path';
+import { directiveResolvers } from './directives';
 
 const typeDefs = importSchema(path.join(__dirname, 'schema.graphql'));
 
@@ -13,6 +14,7 @@ const resolvers = mergeResolvers(resolversArray);
 const schema = makeExecutableSchema({
   typeDefs,
   resolvers,
+  directiveResolvers,
   resolverValidationOptions: {
     requireResolversForResolveType: false
   }

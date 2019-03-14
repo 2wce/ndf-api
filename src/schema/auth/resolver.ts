@@ -24,7 +24,7 @@ export default {
         }
 
         // generate node token for existing User node
-        const token = jwt.sign({ member, exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 7 }, 'jkdksdjkdskjsdkjd');
+        const token = jwt.sign({ memberId: member.id, exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 7 }, 'jkdksdjkdskjsdkjd');
 
         // return the signed jwt
         return { token };

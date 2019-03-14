@@ -6,12 +6,17 @@ import { Prisma } from "./generated/prisma";
 
 const server = new ApolloServer({
     schema,
-    context: {
-      prisma,
-      db: new Prisma({
-        endpoint: 'https://eu1.prisma.sh/kudakwashe-mupeni/ndf-api/dev',
-        secret: 'mysecret123'
-      })
+    context: ({ res, req }) => {
+      return {
+        res,
+        req,
+        prisma,
+        db: new Prisma({
+          endpoint: 'https://eu1.prisma.sh/kudakwashe-mupeni/ndf-api/dev',
+          secret: 'mysecret123'
+        })
+      }
+
      },
     introspection: true,
     playground: true,
@@ -19,7 +24,7 @@ const server = new ApolloServer({
     debug: true,
     engine: true,
     cors: {
-      origin: ['http://localhost:3000', 'http://192.168.1.100:3000'],
+      origin: ['http://localhost:3000', 'http://192.168.1.100:3000', 'http://192.168.1.111:3000'],
       credentials: true
     }
 });

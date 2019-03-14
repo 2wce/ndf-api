@@ -29,7 +29,7 @@ export default {
 
         return { success: true, error: null, memberLevel };
       } catch (error) {
-        return { success: false, error: error, memberLevel: null };
+        return { success: false, error, memberLevel: null };
       }
     },
   },
