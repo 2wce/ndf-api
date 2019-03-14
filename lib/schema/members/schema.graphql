@@ -1,32 +1,7 @@
-  type AddMemberResponse implements Response {
-    member: Member
-    success: Boolean
-    error: Error
-  }
-
-  # Add member response
-  type AddMembershipResponse implements Response {
-    membership: Membership
-    success: Boolean
-    error: Error
-  }
-
-  # Membership
-  type Membership {
-    id: ID!
-
-    # enums
-    type: MemberType
-
-    # relationship
-    level: MemberLevel
-    # nominees: [Nominee]
-    member: Member
-  }
-
-  # Member
   type Member {
+    createdAt: String
     id: ID!
+    updatedAt: String
 
     # enums
     type: MemberType
@@ -41,6 +16,25 @@
     name: String
     phoneNumber: String
     profilePicture: String
+  }
+
+  type AddMemberResponse implements Response {
+    member: Member
+    success: Boolean
+    error: Error
+  }
+
+  type UpdateMemberResponse implements Response {
+    member: Member
+    success: Boolean
+    error: Error
+  }
+
+  # Add member response
+  type AddMembershipResponse implements Response {
+    membership: Membership
+    success: Boolean
+    error: Error
   }
 
   # Enums
@@ -66,6 +60,12 @@
     type: MemberType!
   }
 
+  input UpdateMemberInput {
+    memberId: ID!
+    levelId: ID!
+    type: MemberType!
+  }
+
   # Queries
   type Query {
     member(id: ID!): Member
@@ -75,5 +75,6 @@
   # Mutations
   type Mutation {
     addMember(input: AddMemberInput!): AddMemberResponse
+    updateMember(input: UpdateMemberInput!): UpdateMemberResponse
     addMembership(input: AddMembershipInput!): AddMembershipResponse
   }

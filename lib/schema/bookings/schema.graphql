@@ -5,11 +5,6 @@
     member: Member
   }
 
-  input AddBookingInput {
-    memberId: ID!
-    eventId: ID!
-  }
-
   type AddBookingResponse implements Response {
     success: Boolean
     booking: Booking
@@ -22,6 +17,6 @@
   }
 
   type Mutation {
-    addBooking(input: AddBookingInput!): AddBookingResponse
+    addBooking(eventId: ID!): AddBookingResponse @isAuthenticated
   }
 
