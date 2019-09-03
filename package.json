@@ -39,11 +39,6 @@
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.2.2"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn build && yarn copy"
-    }
-  },
   "resolutions": {
     "graphql": "14.0.2"
   }

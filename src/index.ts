@@ -1,19 +1,18 @@
 import { ApolloServer } from "apollo-server";
-
-import schema from './schema';
-import { prisma } from "./generated/prisma-client";
 import { Prisma } from "./generated/prisma";
+import { prisma } from "./generated/prisma-client";
+import schema from './schema';
 
 const server = new ApolloServer({
     schema,
-    context: ({ res, req }) => {
+    context: ({ res, req }: any) => {
       return {
         res,
         req,
         prisma,
         db: new Prisma({
           endpoint: 'https://eu1.prisma.sh/kudakwashe-mupeni/ndf-api/dev',
-          secret: 'mysecret123'
+          secret: process.env.APOLLO_SECRET
         })
       }
 
@@ -29,6 +28,6 @@ const server = new ApolloServer({
     }
 });
 
-server.listen().then(({ url }) => {
+server.listen().then(({ url }: any) => {
   console.log(`🚀 Server ready at ${url}`)
 });
